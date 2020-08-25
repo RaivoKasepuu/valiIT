@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
@@ -13,15 +14,15 @@ public class Lesson2 {
         //exercise1();
         // exercise2(4);
         // exercise3(2, 5);
-        fibonacci(0);
+        //fibonacci(0);
         //exercise5();
-/*
+
         try {
             exercise6();
 
         } catch (IOException e) {
             e.printStackTrace();
-        } */
+        }
         //exercise6();
 /*
         try {
@@ -30,8 +31,15 @@ public class Lesson2 {
         } catch (IOException e) {
             e.printStackTrace();
         }
-*/
-        //exercise9();
+ */
+        try {
+            exercise9();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     public static void exercise1() {
@@ -91,7 +99,7 @@ public class Lesson2 {
         int f1 = 0;
         int f2 = 1;
         int f3;
-        int fibo=0;
+        int fibo = 0;
 
         if (n == 0) {
             System.out.println("ära trolli!");
@@ -174,55 +182,40 @@ between and including both i and j.
 
 String str = " Hello I'm your String";
 String[] splitStr = str.trim().split("\\s+");
-
-
          */
+
+
         File file = new File("C:/Users/Raivo/vali-it/lesson2/resources/visits.txt");
-        List<Integer> visitors = new ArrayList<Integer>();
-        List<String> dates = new ArrayList<String>();
-        List<String> datesOrder = new ArrayList<String>();
-        Map<String, Integer> datesMap = new HashMap<>();
+        Map<String, Integer> map = new HashMap<>();
+        TreeMap< Integer, String> sorted = new TreeMap<Integer, String>();
+
+        String key;
+        int max = 0;
+        String maxID = "";
         Scanner scanner = new Scanner(file);
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
-            String[] splitStr = line.trim().split("\\s+");
-            //   datesMap.put(splitStr[0].substring(), parseInt(splitStr[1]));
-            System.out.println();
-            int day = parseInt((splitStr[1]));
-            visitors.add(day);
-            dates.add(line);
+            String[] splitStr = line.trim().split(",");
+            map.put(splitStr[0], parseInt(splitStr[1].trim()));
+            sorted.put(parseInt(splitStr[1].trim()),splitStr[0]);
         }
-        int maxID = 0;
-        int max = 0;
-/*
-        for (int i = 0; i < datesMap.size(); i++) {
-            if (max < datesMap.values(i)) {
-                max = visitors.get(i);
-                //maxID = i;
+// Leiame maksimaalse päeva
+
+        for (int i = 1; i < 32; i++) {
+            if (i < 10) {
+                key = "2018-01-0" + String.valueOf(i);
+            } else {
+                key = "2018-01-" + String.valueOf(i);
             }
-            System.out.println(dates.get(i));
-            datesOrder.add(dates.get(i));
-            visitors.remove(i);
-        }
 
-*/
-
-        while (!visitors.isEmpty()) {
-            for (int i = 0; i < visitors.size(); i++) {
-                if (max < visitors.get(i)) {
-                    max = visitors.get(i);
-                    //maxID = i;
-                }
-                System.out.println(dates.get(i));
-                datesOrder.add(dates.get(i));
-                visitors.remove(i);
+            if (map.get(key) > max) {
+                max = map.get(key);
+                maxID = key;
             }
-            max = 0;
         }
-        System.out.println(datesOrder.get(0));
-        System.out.println("Maksimaalne külaliste arv oli " + maxID + ".jaanuaril");
+        System.out.println("Max külastajate arv oli " + maxID + ", kokku külastajaid: " +max);
 
-
+        System.out.println("Külastuspäevad kasvavas jäljekorras: " + sorted.values());
     }
 
     public static void exercise7() {
@@ -262,16 +255,64 @@ String[] splitStr = str.trim().split("\\s+");
 
 
         }
-        //return numbers;
-        //  System.out.println(numbers.get(1));
         System.out.println(summa);
     }
 
 
-    public static void exercise9() {
+    public static void exercise9() throws FileNotFoundException {
         /* TODO
         Sama mis eelmises ülesandes aga ära kasuta BigInt ega BigDecimal klassi
          */
+
+
+        File file = new File("C:/Users/Raivo/vali-it/lesson2/resources/nums.txt");
+
+        String summa = "";
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNext()) {
+            String line = scanner.nextLine();
+            summa = sumString(summa, line);
+        }
+        System.out.println("Summa: " + summa);
     }
+
+
+    public static String sumString(String a, String b) {
+        int lisa = 0;
+        String sum = "";
+        if (a.length() > b.length()) {
+            b = stringEqualizer(b, a);
+        }
+        if (a.length() < b.length()) {
+            a = stringEqualizer(a, b);
+        }
+
+        for (int i = a.length(); i > 0; i--) {
+            int s = parseInt(a.substring(i - 1, i)) + parseInt(b.substring(i - 1, i)) + lisa;
+
+            if (s >= 10) {
+                s = s - 10;
+                lisa = 1;
+            } else {
+                lisa = 0;
+            }
+            sum = String.valueOf(s) + sum;
+        }
+        if (lisa == 1) {
+            sum = "1" + sum;
+        }
+        return sum;
+    }
+
+    public static String stringEqualizer(String a, String b) {
+        if (a.length() < b.length()) {
+            int addZero = b.length() - a.length();
+            for (int i = 0; i < addZero; i++) {
+                a = "0" + a;
+            }
+        }
+        return a;
+    }
+
 
 }
