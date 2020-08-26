@@ -5,21 +5,21 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 
-import static java.lang.Thread.sleep;
-
 // Enne kui seda tegema hakkad tee ära Lesson 2 (välja arvatud ülesanded 6, 8, 9)
 public class Lesson3Hard {
 
     public static void main(String[] args) throws FileNotFoundException {
         //System.out.println(fibonacci(10));
         //System.out.println(fibonacciArray(10));
-        System.out.println(evenFibonacci(34));
-        randomGame();
-        morseCode("Tere Siim Rebane");
+        //System.out.println(evenFibonacci(34));
+        //randomGame();
+        // System.out.println(morseCode("Tere, Siim Rebane"));
+        //System.out.println(fibonacci(8));
+        //System.out.println(evenFibonacci(45));
 
     }
 
-    public static int evenFibonacci(int x) {
+    public static int evenFibonacciOld(int x) {
         // TODO liida kokku kõik paaris fibonacci arvud kuni numbrini x
         int result = 0;
         for (int i = 1; i < fibonacciArray(x).size(); i++) {
@@ -29,7 +29,22 @@ public class Lesson3Hard {
                 }
             }
         }
+        return result;
+    }
 
+
+    public static int evenFibonacci(int x) {
+        // TODO liida kokku kõik paaris fibonacci arvud kuni numbrini x
+        int result = 0;
+        for (int i = 1; i < x; i++) {
+            if (isEven(fibonacci(i))) {
+                if ((fibonacci(i) + result) > x) {
+                    return result;
+                } else {
+                    result = result + fibonacci(i);
+                }
+            }
+        }
         return result;
     }
 
@@ -69,8 +84,9 @@ public class Lesson3Hard {
     public static String morseCode(String text) throws FileNotFoundException {
         // TODO kirjuta programm, mis tagastab sisestatud teksti morse koodis (https://en.wikipedia.org/wiki/Morse_code)
         // Kasuta sümboleid . ja -
-        text=text.toUpperCase();
+        text = text.toUpperCase();
         HashMap<String, String> morse = new HashMap<String, String>();
+        String result = "";
 
         File file = new File("C:/Users/Raivo/vali-it/lesson2/resources/morse.txt");
 
@@ -83,12 +99,17 @@ public class Lesson3Hard {
         }
         //System.out.println(morse.get("E"));
         for (int i = 0; i < text.length(); i++) {
-            System.out.print(morse.get(text.substring(i, i + 1)) + "  ");
+            // Lahendame tühiku puudumise morse maailmas kahe tühikuga
+            if (text.substring(i, i + 1).equals(" ")) {
+                result = "   " + result;
 
+            } else {
+                result = (morse.get(text.substring(i, i + 1)) + "  ") + result;
+            }
         }
 
 
-        return "";
+        return result;
     }
 
     public static ArrayList<Integer> fibonacciArray(int n) {
@@ -121,7 +142,7 @@ public class Lesson3Hard {
     }
 
 
-    public static int fibonacci(int n) {
+    public static int fibonacciOld(int n) {
         // TODO
         // Fibonacci jada on fib(n) = fib(n-1) + fib(n-2);
         // 0, 1, 1, 2, 3, 5, 8, 13, 21
@@ -154,4 +175,32 @@ public class Lesson3Hard {
         return a % 2 <= 0;
     }
 
+
+    public static int fibonacci(int x) {
+        // TODO tagasta x fibonacci
+        // Näiteks
+        // Fibonacci jada on fib(n) = fib(n-1) + fib(n-2);
+        // 0, 1, 1, 2, 3, 5, 8, 13, 21
+
+        if (x > 2) {
+            return fibonacci(x - 1) + fibonacci(x - 2);
+        } else if (x == 2) {
+            return 1;
+        } else {
+            return 0;
+        }
+
+    }
+
+
+    public static int factorial(int x) {
+        // TODO tagasta x faktoriaal.
+        // Näiteks
+        // x = 5
+        // return 5*4*3*2*1 = 120
+        if (x >= 1)
+            return x * factorial(x - 1);
+        else
+            return 1;
+    }
 }
