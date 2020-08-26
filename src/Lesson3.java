@@ -19,7 +19,7 @@ public class Lesson3 {
         // Todo liida kokku kõik numbrid massivis x
         int sum = 0;
         for (int i : x) {
-            sum = sum + i;
+            sum += i;
         }
         return sum;
     }

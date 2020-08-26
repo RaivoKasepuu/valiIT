@@ -39,4 +39,11 @@ public class Lesson1 {
         // Trüki muutuja sisu välja
     }
 
+    public static boolean isEven(int a) {
+        // TODO tagasta true, kui a on paaris arv
+        // tagasta false kui a on paaritu arv
+        return a % 2 <= 0;
+    }
+
+
 }
