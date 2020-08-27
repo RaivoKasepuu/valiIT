@@ -73,6 +73,7 @@ public class Lesson3 {
             if (x % i == 0) {
                 return false;
             }
+
         return true;
     }
 }

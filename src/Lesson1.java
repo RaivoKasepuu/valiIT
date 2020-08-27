@@ -43,6 +43,7 @@ public class Lesson1 {
         // TODO tagasta true, kui a on paaris arv
         // tagasta false kui a on paaritu arv
         return a % 2 <= 0;
+
     }
 
 

@@ -12,7 +12,7 @@ public class Lesson3Hard {
         //System.out.println(fibonacci(10));
         //System.out.println(fibonacciArray(10));
         //System.out.println(evenFibonacci(34));
-        //randomGame();
+        randomGame();
         // System.out.println(morseCode("Tere, Siim Rebane"));
         //System.out.println(fibonacci(8));
         //System.out.println(evenFibonacci(45));

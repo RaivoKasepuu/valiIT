@@ -23,6 +23,7 @@ public class Lesson1MathUtil {
         // TODO tagasta true, kui a on paaris arv
         // tagasta false kui a on paaritu arv
         return false;
+
     }
 
     public static int min(int a, int b, int c){
