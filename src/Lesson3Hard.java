@@ -19,20 +19,6 @@ public class Lesson3Hard {
 
     }
 
-    public static int evenFibonacciOld(int x) {
-        // TODO liida kokku kõik paaris fibonacci arvud kuni numbrini x
-        int result = 0;
-        for (int i = 1; i < fibonacciArray(x).size(); i++) {
-            if (isEven(fibonacciArray(x).get(i))) {
-                if (fibonacciArray(x).get(i) <= x) {
-                    result = result + fibonacciArray(x).get(i);
-                }
-            }
-        }
-        return result;
-    }
-
-
     public static int evenFibonacci(int x) {
         // TODO liida kokku kõik paaris fibonacci arvud kuni numbrini x
         int result = 0;
@@ -75,10 +61,7 @@ public class Lesson3Hard {
                 System.out.println("Arvasid ära! Sul kulus " + count + " katset.");
                 break;
             }
-
         }
-
-
     }
 
     public static String morseCode(String text) throws FileNotFoundException {
@@ -142,32 +125,7 @@ public class Lesson3Hard {
     }
 
 
-    public static int fibonacciOld(int n) {
-        // TODO
-        // Fibonacci jada on fib(n) = fib(n-1) + fib(n-2);
-        // 0, 1, 1, 2, 3, 5, 8, 13, 21
-        // Tagasta fibonacci jada n element
 
-        int f1 = 0;
-        int f2 = 1;
-        int f3;
-        int fibonacci = 0;
-
-        if (n == 1) {
-            return 0;
-        } else if (n == 2) {
-            return 1;
-        } else {
-            for (int i = 2; i < n; i++) {
-                f3 = f1 + f2;
-                fibonacci = f3;
-                f1 = f2;
-                f2 = f3;
-            }
-
-        }
-        return fibonacci;
-    }
 
     public static boolean isEven(int a) {
         // TODO tagasta true, kui a on paaris arv
@@ -203,4 +161,45 @@ public class Lesson3Hard {
         else
             return 1;
     }
+
+    public static int fibonacciOld(int n) {
+        // TODO
+        // Fibonacci jada on fib(n) = fib(n-1) + fib(n-2);
+        // 0, 1, 1, 2, 3, 5, 8, 13, 21
+        // Tagasta fibonacci jada n element
+
+        int f1 = 0;
+        int f2 = 1;
+        int f3;
+        int fibonacci = 0;
+
+        if (n == 1) {
+            return 0;
+        } else if (n == 2) {
+            return 1;
+        } else {
+            for (int i = 2; i < n; i++) {
+                f3 = f1 + f2;
+                fibonacci = f3;
+                f1 = f2;
+                f2 = f3;
+            }
+
+        }
+        return fibonacci;
+    }
+
+    public static int evenFibonacciOld(int x) {
+        // TODO liida kokku kõik paaris fibonacci arvud kuni numbrini x
+        int result = 0;
+        for (int i = 1; i < fibonacciArray(x).size(); i++) {
+            if (isEven(fibonacciArray(x).get(i))) {
+                if (fibonacciArray(x).get(i) <= x) {
+                    result = result + fibonacciArray(x).get(i);
+                }
+            }
+        }
+        return result;
+    }
+
 }
