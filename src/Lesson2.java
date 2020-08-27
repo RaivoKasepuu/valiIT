@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
@@ -15,8 +14,10 @@ public class Lesson2 {
         // exercise2(4);
         // exercise3(2, 5);
         //fibonacci(0);
-        //exercise5();
+        exercise5();
+        //collatzLength(10);
 
+/*
         try {
             exercise6();
 
@@ -24,14 +25,14 @@ public class Lesson2 {
             e.printStackTrace();
         }
         //exercise6();
-/*
+
         try {
             exercise8();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
- */
+
         try {
             exercise9();
 
@@ -39,7 +40,7 @@ public class Lesson2 {
             e.printStackTrace();
         }
 
-
+*/
     }
 
     public static void exercise1() {
@@ -148,22 +149,48 @@ the 1 is printed. For a given n this is called the cycle-length of n. In the exa
 length of 22 is 16.
 For any two numbers i and j you are to determine the maximum cycle length over all numbers
 between and including both i and j.
+
+        int n = 10;
+        int m=20;
          */
+
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Sisesta n!");
+        System.out.println("Sisesta jada algus!");
         int n = scanner.nextInt();
-        System.out.print(n);
+        System.out.println("Sisesta jada lõpp!");
+        int m = scanner.nextInt();
+        System.out.print(m);
+        System.out.println("Leiame pikima Collatzi jada vahemikus " + n + " ... " + m);
+
+
+        int max = 0;
+        int maxID = 0;
+        for (int i = n; i <= m; i++) {
+            if (collatzLength(i) > max) {
+                max = collatzLength(i);
+                maxID = i;
+            }
+        }
+        System.out.println();
+        System.out.println(n + " " + m + " " + maxID);
+    }
+
+    public static int collatzLength(int n) {
+        int counter = 0;
+        int m = n;
         while (!(n == 1)) {
             if (n % 2 == 0) {
                 n = n / 2;
             } else {
                 n = 3 * n + 1;
             }
-            System.out.print(" " + n);
-
+            counter++;
         }
+        System.out.println(m + "->" + counter);
+        return counter;
 
     }
+
 
     public static void exercise6() throws FileNotFoundException {
         /*
@@ -187,7 +214,7 @@ String[] splitStr = str.trim().split("\\s+");
 
         File file = new File("C:/Users/Raivo/vali-it/lesson2/resources/visits.txt");
         Map<String, Integer> map = new HashMap<>();
-        TreeMap< Integer, String> sorted = new TreeMap<Integer, String>();
+        TreeMap<Integer, String> sorted = new TreeMap<>();
 
         String key;
         int max = 0;
@@ -197,15 +224,15 @@ String[] splitStr = str.trim().split("\\s+");
             String line = scanner.nextLine();
             String[] splitStr = line.trim().split(",");
             map.put(splitStr[0], parseInt(splitStr[1].trim()));
-            sorted.put(parseInt(splitStr[1].trim()),splitStr[0]);
+            sorted.put(parseInt(splitStr[1].trim()), splitStr[0]);
         }
 // Leiame maksimaalse päeva
 
         for (int i = 1; i < 32; i++) {
             if (i < 10) {
-                key = "2018-01-0" + String.valueOf(i);
+                key = "2018-01-0" + i;
             } else {
-                key = "2018-01-" + String.valueOf(i);
+                key = "2018-01-" + i;
             }
 
             if (map.get(key) > max) {
@@ -213,7 +240,7 @@ String[] splitStr = str.trim().split("\\s+");
                 maxID = key;
             }
         }
-        System.out.println("Max külastajate arv oli " + maxID + ", kokku külastajaid: " +max);
+        System.out.println("Max külastajate arv oli " + maxID + ", kokku külastajaid: " + max);
 
         System.out.println("Külastuspäevad kasvavas jäljekorras: " + sorted.values());
     }
