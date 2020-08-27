@@ -340,6 +340,4 @@ String[] splitStr = str.trim().split("\\s+");
         }
         return a;
     }
-
-
 }
